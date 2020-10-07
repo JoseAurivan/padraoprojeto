@@ -1,1 +1,1 @@
-# padraoprojeto
+Banco Bradesco ainda nao implementado
