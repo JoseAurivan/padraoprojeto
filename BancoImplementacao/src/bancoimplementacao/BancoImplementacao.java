@@ -17,7 +17,7 @@ public class BancoImplementacao {
         BancoDoBrasil bb = new BancoDoBrasil();
         
         bb.lerArquivo("C:/Users/auriv/OneDrive/Documentos/NetBeansProjects/BancoImplementacao/src/bancoimplementacao/banco-brasil-1.txt");
-        bb.lerBoletos();
+       
     }
 
     

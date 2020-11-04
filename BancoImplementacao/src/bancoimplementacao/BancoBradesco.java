@@ -18,7 +18,7 @@ public class BancoBradesco implements InterfaceBanco {
     public List<Boleto> boletos;
     
     @Override
-    public List<Boleto> lerArquivo(String nomeArquivo) {
+    public String lerArquivo(String nomeArquivo) {
         boletos = new ArrayList();
         ProcessaBoleto process = new ProcessaBoleto();
         List<String> linhas = process.processar(nomeArquivo);
@@ -27,7 +27,7 @@ public class BancoBradesco implements InterfaceBanco {
             boletos.add(bol);
         }
         
-        return boletos;
+        return null;
     }
     
 
@@ -71,9 +71,11 @@ public class BancoBradesco implements InterfaceBanco {
     }
 
     @Override
-    public void lerBoletos() {
+    public String lerBoletos() {
       for(Boleto bol: boletos)
           bol.toString();
+      
+      return null;
     }
     
 }

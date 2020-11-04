@@ -20,7 +20,7 @@ public class BancoDoBrasil implements InterfaceBanco{
     
 
     @Override
-    public List<Boleto> lerArquivo(String nomeArquivo) {
+    public String lerArquivo(String nomeArquivo) {
         boletos = new ArrayList();
         ProcessaBoleto process = new ProcessaBoleto();
         List<String> linhas = process.processar(nomeArquivo);
@@ -29,7 +29,7 @@ public class BancoDoBrasil implements InterfaceBanco{
             boletos.add(bol);
         }
         
-        return boletos;
+        return lerBoletos();
     }
 
     @Override
@@ -72,10 +72,13 @@ public class BancoDoBrasil implements InterfaceBanco{
     }
 
     @Override
-    public void lerBoletos() {
+    public String lerBoletos() {
+        String result = "";
         for(Boleto bol: boletos){
-            bol.toString();
+            result += bol.toString();
         }
+        
+        return result;
     }
 
 }
