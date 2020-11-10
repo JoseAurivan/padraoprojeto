@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author auriv
  */
-public class BancoDoBrasil implements InterfaceBanco{
+public class BancoDoBrasil extends GerarBoleto implements InterfaceBanco{
     public List<Boleto> boletos;
     
 
@@ -25,16 +25,17 @@ public class BancoDoBrasil implements InterfaceBanco{
         ProcessaBoleto process = new ProcessaBoleto();
         List<String> linhas = process.processar(nomeArquivo);
         for(String linha: linhas){
-            Boleto bol = gerarBoleto(linha);
+            Boleto bol = processarBoleto(linha);
             boletos.add(bol);
         }
         
         return lerBoletos();
     }
+    
 
     @Override
-    public Boleto gerarBoleto(String linha) {
-        Boleto bol = new Boleto();
+    public Boleto processarBoleto(String linha) {
+        BoletoBancoBrasil bol = new BoletoBancoBrasil();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         String[] dados = linha.split(";");

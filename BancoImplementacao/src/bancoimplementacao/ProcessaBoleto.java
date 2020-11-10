@@ -23,8 +23,7 @@ import java.util.logging.Logger;
 public class ProcessaBoleto{
     
     public  List<String> linhas;
-    
-    
+       
     public  List<String> processar(String path){
         linhas = new ArrayList();
         String linha = "";

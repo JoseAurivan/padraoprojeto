@@ -5,13 +5,12 @@
  */
 package bancoimplementacao;
 
-import java.util.List;
-
 /**
  *
  * @author auriv
  */
-public interface InterfaceBanco {
-    public String lerArquivo(String nomeArquivo);   
-    public String lerBoletos();
+public abstract class GerarBoleto{
+    public Boleto processarBoleto(String linha){
+        return null;
+}
 }

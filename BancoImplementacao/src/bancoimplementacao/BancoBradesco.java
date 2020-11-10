@@ -6,6 +6,7 @@
 package bancoimplementacao;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
  *
  * @author auriv
  */
-public class BancoBradesco implements InterfaceBanco {
+public class BancoBradesco extends GerarBoleto implements InterfaceBanco {
     public List<Boleto> boletos;
     
     @Override
@@ -23,44 +24,64 @@ public class BancoBradesco implements InterfaceBanco {
         ProcessaBoleto process = new ProcessaBoleto();
         List<String> linhas = process.processar(nomeArquivo);
         for(String linha: linhas){
-            Boleto bol = gerarBoleto(linha);
+            Boleto bol = processarBoleto(linha);
             boletos.add(bol);
         }
         
         return null;
     }
     
-
+    /**
+     *
+     * @param linha
+     * @return
+     */
     @Override
-    public Boleto gerarBoleto(String linha) {
-        Boleto bol = new Boleto();
+    public Boleto processarBoleto(String linha) {
+        BoletoBradesco bol = new BoletoBradesco();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String[] dados = linha.split(";");
         for(int i =0; i< dados.length; i++){
             switch(i){
                 case 0:
+                    //id
                     bol.setId(Integer.parseInt(dados[i]));
                     break;
                 case 1:
+                    //cod_boleto
                     bol.setCodBoleto(Integer.parseInt(dados[i]));
                     break;
                 case 2:
-                    bol.setDataVencimento(LocalDate.parse(dados[i],dateTimeFormatter));
+                    //agencia
+                    bol.setAgencia(dados[i]);
                     break;
                 case 3:
-                    bol.setDataPagamento(LocalDate.parse(dados[i],dateTimeFormatter));
+                    //conta do cliente
+                    bol.setContaCliente(dados[i]);
                     break;
                 case 4:
-                    bol.setCpfCliente(dados[i]);
+                    //data vencimento
+                    bol.setDataVencimento(LocalDate.parse(dados[i],dateTimeFormatter));
                     break;
                 case 5:
-                    bol.setValor(Double.parseDouble(dados[i]));
+                    //data pagamento
+                    bol.setDataPagamento(LocalDate.parse(dados[i],formatter));
                     break;
                 case 6:
-                    bol.setMulta(Double.parseDouble(dados[i]));
+                    //cpf
+                    bol.setCpfCliente(dados[i]);
                     break;
                 case 7:
+                    //valor
+                    bol.setValor(Double.parseDouble(dados[i]));
+                    break;
+                case 8:
+                    //multa
+                    bol.setMulta(Double.parseDouble(dados[i]));
+                    break;
+                    //juros
+                case 9:
                     bol.setJuros(Double.parseDouble(dados[i]));
                     break;
                             

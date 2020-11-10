@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
  *
  * @author auriv
  */
-class Boleto {
+abstract class Boleto {
     private int id;
     private int codBoleto;
     private LocalDate dataVencimento;
